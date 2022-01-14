@@ -6,22 +6,14 @@ Sample of replicaset available in "3-replicaset.yaml"
 > Some important notes 
 <ul>
 <li>ReplicaSets must have the selector tab for the replicaset to know which pods to monitor</li>
-<li>To scale a replicaset, we can do the following</li>
+<li>Common commands for Replicasets</li>
 
 ```bash
 kubectl edit rs "replicasetname" & modify the value for replicas from "x" to "n"
 kubectl scale --replicas=3 -f replicaset-file.yaml
 kubectl scale --replicas=3 replicaset "replicasetname" 
-```
-
-<li>To delete replicaset</li>
-```bash
 kubectl delete replicaset "replicasetname"
 kubectl delete rs "replicasetname"
-```
-
-<li>To replace existing replicaset with new definition</li>
-```bash
 kubectl replace -f "newreplicasetdefinitionfile"
 ```
 </ul>
