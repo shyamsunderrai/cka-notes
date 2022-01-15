@@ -60,3 +60,15 @@ spec:
 status: {}
 ```
 
+Format to connect to a service on a given namespace
+> servicename.namespace.svc.cluster.local
+> Here "servicename" is the service created identified by its name & "namespace" is the actual namespace like "default"
+> cluster.local is the default domain for kubernetes cluster
+
+
+To change the default namespace
+> kubectl config set-context $(kubectl config current-context) --namespace=dev
+> This would ensure that the default namespace is now set to "dev"
+
+
+
