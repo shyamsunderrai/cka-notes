@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testpod
+  labels:
+    app: testpod
+    type: backend
+
+spec:
+  containers:
+    - name: testpod
+      image: nginx 
+      ports:
+      - containerPort: 80
+        name: http
+        protocol: TCP
+
+# An easier way would be to run this
+# kubectl run testpod --image=nginx --port=80 --labels='app=testpod','type=backend' --port=80 
+# To generate a file, followed by adding modifications like protocol etc and then running it 
+# kubectl run testpod --image=nginx --port=80 --labels='app=testpod','type=backend' --port=80 --dry-run=client -o yaml > testpod.yaml 
+       

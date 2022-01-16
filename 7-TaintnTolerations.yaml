@@ -1,0 +1,23 @@
+#### Enteries under tolerations section to tolerate the taint so the pod can execute on tainted node
+#### To taint a node 
+#### kubectl taint nodes node01 spray=mortein:NoSchedule
+### To remove taint "kubectl edit node nodename" & remove the taint
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: bee
+  name: bee
+spec:
+  containers:
+  - image: nginx
+    name: bee
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  tolerations:
+    - key: spray
+      value: mortein
+      effect: NoSchedule
+      operator: "Equal"

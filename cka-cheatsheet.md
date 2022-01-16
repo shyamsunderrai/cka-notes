@@ -71,4 +71,44 @@ To change the default namespace
 > This would ensure that the default namespace is now set to "dev"
 
 
+Scheduling --- 
+> To check a pod or set of resources using labels, we can use selector
+```bash
+kubectl get pods --selector app=dev 
+```
+> Selecting pod/resources with multiple labels
+```bash
+kubectl get pods --selector tier=frontend,env=prod,bu=finance
+```
+
+Command to Taint nodes, so deployments of pods become intolerant
+```bash
+kubectl taint nodes node01 spray=mortein:NoSchedule
+```
+> To check the taints
+```bash
+kubectl describe node <nodename> | egrep -B5 Taints
+```
+
+Apply node labels, imperative approach
+```bash
+kubectl label nodes <nodename> key=value
+```
+> To apply the affinty rules to deployment
+> Aligns with the same identation as containers, inside spec
+```bash
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: color
+                operator: In
+                values:
+                - blue
+      containers:
+      - image: nginx
+```                  
+
+
 

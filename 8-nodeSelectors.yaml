@@ -1,0 +1,13 @@
+#### Node selectors are easier way to let suitably sized pods run on the nodes with its matching capacity or bigger one so a given node is not fully occupied
+#### Can be done by using
+#### kubectl label nodes <nodename> key=value // here key is the name of the label and value is any value we need to differentiate/classify upon. Simple one could be size=large
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: mytestpod
+spec:
+  containers:
+    - name: mytestpod
+      image: nginx
+  nodeSelector:
+    size: Large
