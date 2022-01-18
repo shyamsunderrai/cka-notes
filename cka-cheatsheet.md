@@ -110,5 +110,16 @@ kubectl label nodes <nodename> key=value
       - image: nginx
 ```                  
 
+Modifiable fiends of POD are
+>spec.containers[*].image
+>spec.initContainers[*].image
+>spec.activeDeadlineSeconds
+>spec.tolerations
 
+To get all the events from the default or a given namespace
+> kubectl get events
+> kubectl get events -n <namespace>
 
+To sort resources after enabling metrics-server
+> kubectl top pod --sort-by='memory'
+> kubectl top node --sort-by='memory'

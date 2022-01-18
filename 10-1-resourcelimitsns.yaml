@@ -1,0 +1,30 @@
+#### Setting resource limits on namespace level
+apiVersion: v1
+kind: LimitRange
+metadata: 
+  name: devlimitrange
+  namespace: dev
+spec:
+  limits:
+    - default: 
+        memory: 512Mi
+        cpu: 1
+      defaultRequest:
+        memory: 256Mi
+        cpu: 0.5   
+      type: Container
+    
+#### Outcome of above would be the application of limitrange on dev namespace
+####kubectl describe ns/dev 
+####Name:         dev
+####Labels:       kubernetes.io/metadata.name=dev
+####Annotations:  <none>
+####Status:       Active
+
+####No resource quota.
+
+####Resource Limits
+####Type       Resource  Min  Max  Default Request  Default Limit  Max Limit/Request Ratio
+#### ----       --------  ---  ---  ---------------  -------------  -----------------------
+#### Container  memory    -    -    256Mi            512Mi          -
+#### Container  cpu       -    -    500m             1              -

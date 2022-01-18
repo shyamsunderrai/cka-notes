@@ -1,0 +1,18 @@
+#### The only way you can make a pod static, is by placing them in the kubelet manifets file
+#### By defaukt, the manifets folder is within /etc/kubernetes/manifests 
+#### We can also look for this in the kubelet.service definition
+#### /etc/kubernetes/manifests/static-busybox.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: static-busybox
+spec:
+  containers:
+  - command: ["sleep"]
+    args: ["1000"]
+    image: busybox
+    name: static-busybox
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
