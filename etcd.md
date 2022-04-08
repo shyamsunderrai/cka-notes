@@ -155,6 +155,24 @@ root@samurai:~# etcdctl member list
 8e9e05c52164694d: name=default peerURLs=http://localhost:2380 clientURLs=http://localhost:2379 isLeader=true
 ```
 
+#### Backup and Restore of etcd
+Taking backup in etcd
+```bash
+ETCDCTL_API=3 etcdctl snapshot save snapshot.db
+service kube-apiserver stop
+ETCDCTL_API=3 etcdctl snapshot restore snapshot.db --data-dir /location/to/etcd/dir
+systemctl daemon reload
+systemctl restart etcd
+systemctl kube-apiserver start
+```
+> Command to take the etcd backup
+```bash
+ETCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379  --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key snapshot save /opt/snapshot-pre-boot.db
+```
+> To Restore
+```bash
+ETCDCTL_API=3 etcdctl  --data-dir /var/lib/etcd-from-backup snapshot restore /opt/snapshot-pre-boot.db
+```
 
 
 
